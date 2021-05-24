@@ -1,10 +1,10 @@
-class Whois2 < Formula
-  desc "Lookup tool for domain names and other internet resources (add mkpasswd)"
+class Mkpasswd < Formula
+  desc "mkpasswd tool to make password tool"
   homepage "https://packages.debian.org/sid/whois"
-  url "https://deb.debian.org/debian/pool/main/w/whois/whois_5.5.9.tar.xz"
+  url "https://github.com/rfc1036/whois/archive/refs/tags/v5.5.9.tar.gz"
   sha256 "8a646b9bc1100da366e4dd89ba044b6cf11e66d811e8fef9a421ce3f65470301"
   license "GPL-2.0-or-later"
-  head "https://github.com/tonidy/whois.git", :branch => "master" 
+  #head "https://github.com/tonidy/whois.git", :branch => "master" 
 
   bottle do
     sha256 cellar: :any, arm64_big_sur: "131eca7a6a0466f410a0ad4f00e54de60fd5dfd2eca4f94ebfdbbe7dd28c65b5"
@@ -16,12 +16,15 @@ class Whois2 < Formula
   keg_only :provided_by_macos
 
   depends_on "pkg-config" => :build
-  depends_on "libidn2"
+  # depends_on "libidn2"
   depends_on "openssl"
 
   def install
     on_macos do
       ENV.append "LDFLAGS", "-L/usr/lib -liconv"
+      ENV.append "LDFLAGS", "-L/usr/lib -licrypto"
+      # export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+      # export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
     end
 
     have_iconv = "HAVE_ICONV=1"
@@ -30,10 +33,10 @@ class Whois2 < Formula
       have_iconv = "HAVE_ICONV=0"
     end
 
-    system "make", "whois", have_iconv
-    bin.install "whois"
-    man1.install "whois.1"
-    man5.install "whois.conf.5"
+    # system "make", "whois", have_iconv
+    # bin.install "whois"
+    # man1.install "whois.1"
+    # man5.install "whois.conf.5"
 
     system "make", "mkpasswd", have_iconv
     bin.install "mkpasswd"
@@ -41,7 +44,7 @@ class Whois2 < Formula
   end
 
   test do
-    system "#{bin}/whois", "brew.sh"
+    # system "#{bin}/whois", "brew.sh"
     system "#{bin}/mkpasswd", "test"
   end
 end
