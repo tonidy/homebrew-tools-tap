@@ -11,7 +11,7 @@ class Mkpasswd < Formula
 
   stable do
     patch do
-      url "https://gist.github.com/tonidy/6676834c5434998d5a37200e39a533ed/raw/f80a6e596c503e33efd48cbd92d5f07768a2d1f3/whois.diff"
+      url "https://gist.github.com/tonidy/6676834c5434998d5a37200e39a533ed/raw/5a04e2988f95fce473e157e2f1ad5206fedac472/whois.diff"
       sha256 "a9175e6d367f25890ee3bce65b972d2b42524204e0423902d72e8eb92e87ed99"
     end
   end
