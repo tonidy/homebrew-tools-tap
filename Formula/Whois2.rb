@@ -4,7 +4,7 @@ class Whois2 < Formula
   url "https://deb.debian.org/debian/pool/main/w/whois/whois_5.5.9.tar.xz"
   sha256 "8a646b9bc1100da366e4dd89ba044b6cf11e66d811e8fef9a421ce3f65470301"
   license "GPL-2.0-or-later"
-  head "https://github.com/tonidy/whois.git", :branch => "next" 
+  head "https://github.com/tonidy/whois.git", :branch => "master" 
 
   bottle do
     sha256 cellar: :any, arm64_big_sur: "131eca7a6a0466f410a0ad4f00e54de60fd5dfd2eca4f94ebfdbbe7dd28c65b5"
@@ -32,13 +32,13 @@ class Whois2 < Formula
 
     system "make", "whois", have_iconv
     bin.install "whois"
-    # man1.install "whois.1"
-    # man5.install "whois.conf.5"
+    man1.install "whois.1"
+    man5.install "whois.conf.5"
 
-    system "make", "mkpasswd"
+    system "make", "mkpasswd", have_iconv
     bin.install "mkpasswd"
-    # man1.install "mkpasswd.1"
-    # man5.install "mkpasswd.conf.5"
+    man1.install "mkpasswd.1"
+    man5.install "mkpasswd.conf.5"
   end
 
   test do
