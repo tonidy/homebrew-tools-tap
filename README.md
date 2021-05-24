@@ -1,4 +1,4 @@
-# Brew tools tap
+# Additional brew tools tap
 
 ## Why?
 
@@ -6,9 +6,16 @@ To install formula that doesn't exist on Homebrew core
 
 ## How do I install these formulae?
 
-`brew install tonidy/tools-tap/<formula>`
+```console
+brew tap tonidy/tools-tap
+brew install mkpasswd
+```
 
-Or `brew tap tonidy/tools-tap` and then `brew install <formula>`.
+### or
+
+```console
+brew install tonidy/tools-tap/mkpasswd
+```
 
 ## Documentation
 
