@@ -1,10 +1,10 @@
 class WhoisExt < Formula
   desc "Lookup tool for domain names and other internet resources (add mkpasswd)"
   homepage "https://packages.debian.org/sid/whois"
-  url "https://deb.debian.org/debian/pool/main/w/whois/whois_5.5.9.tar.xz"
-  sha256 "69088241ed33d2204f153c8005b312a69b60a1429075ff49f42f9f1f73a19c19"
+  # url "https://deb.debian.org/debian/pool/main/w/whois/whois_5.5.9.tar.xz"
+  # sha256 "69088241ed33d2204f153c8005b312a69b60a1429075ff49f42f9f1f73a19c19"
   license "GPL-2.0-or-later"
-  head "https://github.com/rfc1036/whois.git"
+  head "https://github.com/tonidy/whois"
 
   bottle do
     sha256 cellar: :any, arm64_big_sur: "131eca7a6a0466f410a0ad4f00e54de60fd5dfd2eca4f94ebfdbbe7dd28c65b5"
@@ -17,6 +17,7 @@ class WhoisExt < Formula
 
   depends_on "pkg-config" => :build
   depends_on "libidn2"
+  depends_on "openssl"
 
   def install
     on_macos do
@@ -33,9 +34,15 @@ class WhoisExt < Formula
     bin.install "whois"
     man1.install "whois.1"
     man5.install "whois.conf.5"
+
+    system "make", "mkpasswd", have_iconv
+    bin.install "mkpasswd"
+    man1.install "mkpasswd.1"
+    man5.install "mkpasswd.conf.5"
   end
 
   test do
     system "#{bin}/whois", "brew.sh"
+    system "#{bin}/mkpasswd", "test"
   end
 end
