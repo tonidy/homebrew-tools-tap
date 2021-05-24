@@ -38,7 +38,6 @@ class Whois2 < Formula
     system "make", "mkpasswd", have_iconv
     bin.install "mkpasswd"
     man1.install "mkpasswd.1"
-    man5.install "mkpasswd.conf.5"
   end
 
   test do
