@@ -22,7 +22,7 @@ class Mkpasswd < Formula
   def install
     on_macos do
       ENV.append "LDFLAGS", "-L/usr/lib -liconv"
-      ENV.append "LDFLAGS", "-L/usr/lib -licrypto"
+      ENV.append "LDFLAGS", "-L/usr/lib -libcrypto"
       # export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
       # export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
     end
