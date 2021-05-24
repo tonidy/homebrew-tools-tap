@@ -6,12 +6,12 @@ class Mkpasswd < Formula
   license "GPL-2.0-or-later"
   #head "https://github.com/tonidy/whois.git", :branch => "master" 
 
-  bottle do
-    sha256 cellar: :any, arm64_big_sur: "131eca7a6a0466f410a0ad4f00e54de60fd5dfd2eca4f94ebfdbbe7dd28c65b5"
-    sha256 cellar: :any, big_sur:       "9ced0ec07b88b9915a574e2f5e31b66f76e8ddd0d7b678452cef175ef2e5cb14"
-    sha256 cellar: :any, catalina:      "961d72a35be229f81b4202f171054cb234b15ece9df017b125b0bd8798a5f4ca"
-    sha256 cellar: :any, mojave:        "7b8d36fae69c3c4ec0d77bd7f713ff0a587101053f2de8f5e155a7f040e5eaba"
-  end
+  # bottle do
+  #   sha256 cellar: :any, arm64_big_sur: "131eca7a6a0466f410a0ad4f00e54de60fd5dfd2eca4f94ebfdbbe7dd28c65b5"
+  #   sha256 cellar: :any, big_sur:       "9ced0ec07b88b9915a574e2f5e31b66f76e8ddd0d7b678452cef175ef2e5cb14"
+  #   sha256 cellar: :any, catalina:      "961d72a35be229f81b4202f171054cb234b15ece9df017b125b0bd8798a5f4ca"
+  #   sha256 cellar: :any, mojave:        "7b8d36fae69c3c4ec0d77bd7f713ff0a587101053f2de8f5e155a7f040e5eaba"
+  # end
 
   keg_only :provided_by_macos
 
