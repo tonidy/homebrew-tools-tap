@@ -2,7 +2,7 @@ class Mkpasswd < Formula
   desc "mkpasswd tool to make password tool"
   homepage "https://packages.debian.org/sid/whois"
   url "https://github.com/tonidy/whois/archive/3be4b59af6d601c3b8f2d2634459fc31b1bf7155.zip"
-  sha256 "32de280893ca1fa93a6d4e952f04a4e66bcd62f5bddf631f207b217285efdea0"
+  sha256 "b946386e2406991a855b935ad4efca87767bb65df80d5616d08c88a3ec716aaa"
   license "GPL-2.0-or-later"
   head "https://github.com/tonidy/whois.git", :branch => "master" 
 
