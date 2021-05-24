@@ -2,13 +2,19 @@ class Mkpasswd < Formula
   desc "mkpasswd tool to make password tool"
   homepage "https://packages.debian.org/sid/whois"
   url "https://github.com/rfc1036/whois/archive/refs/tags/v5.5.9.zip"
-  sha256 "b946386e2406991a855b935ad4efca87767bb65df80d5616d08c88a3ec716aaa"
+  sha256 "c37d62883f549f28d214aa1aa1f393d335d20589f0353be714d568bd597ec5f2"
   version "5.5.9"
   license "GPL-2.0-or-later"
   head "https://github.com/tonidy/whois.git", :branch => "master" 
 
   bottle :unneeded
-  keg_only :provided_by_macos
+
+  stable do
+    patch do
+      url "https://gist.github.com/tonidy/6676834c5434998d5a37200e39a533ed/raw/f80a6e596c503e33efd48cbd92d5f07768a2d1f3/whois.diff"
+      sha256 "a9175e6d367f25890ee3bce65b972d2b42524204e0423902d72e8eb92e87ed99"
+    end
+  end
 
   depends_on "pkg-config" => :build
   depends_on "openssl"
@@ -16,8 +22,6 @@ class Mkpasswd < Formula
   def install
     on_macos do
       ENV.append "LDFLAGS", "-L/usr/lib -liconv"
-      # ENV.append "LDFLAGS", "-L/usr/local/opt/openssl@1.1/lib"
-      # ENV.append "CPPFLAGS", "-I/usr/local/opt/openssl@1.1/include"
     end
 
     have_iconv = "HAVE_ICONV=1"
@@ -27,8 +31,8 @@ class Mkpasswd < Formula
     end
 
     system "make", "mkpasswd", have_iconv
-    bin.install "bin/mkpasswd"
-    man1.install "man/mkpasswd.1"
+    bin.install "mkpasswd"
+    man1.install "mkpasswd.1"
   end
 
   test do
