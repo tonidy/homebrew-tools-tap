@@ -1,11 +1,11 @@
 class Mkpasswd < Formula
-  desc "mkpasswd tool to make password tool"
+  desc "mkpasswd: tool to make a password"
   homepage "https://packages.debian.org/sid/whois"
   url "https://github.com/rfc1036/whois/archive/refs/tags/v5.5.9.zip"
   sha256 "c37d62883f549f28d214aa1aa1f393d335d20589f0353be714d568bd597ec5f2"
   version "5.5.9"
   license "GPL-2.0-or-later"
-  head "https://github.com/tonidy/whois.git", :branch => "master" 
+  head "https://github.com/rfc1036/whois.git", :branch => "master" 
 
   bottle :unneeded
 
