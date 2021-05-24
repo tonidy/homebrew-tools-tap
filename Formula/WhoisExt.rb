@@ -1,4 +1,4 @@
-class WhoisExt < Formula
+class Whoisext < Formula
   desc "Lookup tool for domain names and other internet resources (add mkpasswd)"
   homepage "https://packages.debian.org/sid/whois"
   # url "https://deb.debian.org/debian/pool/main/w/whois/whois_5.5.9.tar.xz"
