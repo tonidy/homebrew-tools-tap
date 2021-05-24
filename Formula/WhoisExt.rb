@@ -1,7 +1,7 @@
 class Whoisext < Formula
   desc "Lookup tool for domain names and other internet resources (add mkpasswd)"
   homepage "https://packages.debian.org/sid/whois"
-  # url "https://deb.debian.org/debian/pool/main/w/whois/whois_5.5.9.tar.xz"
+  url "https://deb.debian.org/debian/pool/main/w/whois/whois_5.5.9.tar.xz"
   sha256 "8a646b9bc1100da366e4dd89ba044b6cf11e66d811e8fef9a421ce3f65470301"
   license "GPL-2.0-or-later"
   head "https://github.com/tonidy/whois", :branch => "next" 
@@ -35,7 +35,7 @@ class Whoisext < Formula
     # man1.install "whois.1"
     # man5.install "whois.conf.5"
 
-    system "make", "mkpasswd", have_iconv
+    system "make", "mkpasswd"
     bin.install "mkpasswd"
     # man1.install "mkpasswd.1"
     # man5.install "mkpasswd.conf.5"
