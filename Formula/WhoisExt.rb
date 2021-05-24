@@ -4,7 +4,7 @@ class Whoisext < Formula
   # url "https://deb.debian.org/debian/pool/main/w/whois/whois_5.5.9.tar.xz"
   sha256 "8a646b9bc1100da366e4dd89ba044b6cf11e66d811e8fef9a421ce3f65470301"
   license "GPL-2.0-or-later"
-  head "https://github.com/tonidy/whois"
+  head "https://github.com/tonidy/whois", :branch => "main" 
 
   bottle do
     sha256 cellar: :any, arm64_big_sur: "131eca7a6a0466f410a0ad4f00e54de60fd5dfd2eca4f94ebfdbbe7dd28c65b5"
