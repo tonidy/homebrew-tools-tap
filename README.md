@@ -1,4 +1,4 @@
-# Tonidy Tools-tap
+# Brew tools tap
 
 ## How do I install these formulae?
 
