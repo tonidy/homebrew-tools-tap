@@ -35,6 +35,12 @@ class Mkpasswd < Formula
     man1.install "mkpasswd.1"
   end
 
+  def caveats; <<~EOS
+    Debian mkpasswd has been installed as `mkpasswd` and may shadow the
+    system binary of the same name.
+  EOS
+  end
+
   test do
     system "#{bin}/mkpasswd", "test"
   end
