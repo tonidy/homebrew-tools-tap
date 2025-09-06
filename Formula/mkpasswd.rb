@@ -7,8 +7,6 @@ class Mkpasswd < Formula
   license "GPL-2.0-or-later"
   head "https://github.com/rfc1036/whois.git", :branch => "master" 
 
-  bottle :unneeded
-
   stable do
     patch do
       url "https://gist.github.com/tonidy/6676834c5434998d5a37200e39a533ed/raw/559e011077db15ac755e08eb971c1e1251653ff9/whois.diff"
