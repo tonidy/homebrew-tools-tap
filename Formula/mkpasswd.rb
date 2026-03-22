@@ -3,7 +3,7 @@ class Mkpasswd < Formula
   homepage "https://packages.debian.org/sid/whois"
   url "https://github.com/rfc1036/whois/archive/refs/tags/v5.6.6.zip"
   sha256 "3418aa374858199e14a229b89547bc1aca6412ebf18bc3be11cb9d7268bf562a"
-  version "5.6.6_10"
+  version "5.6.6_11"
   license "GPL-2.0-or-later"
   head "https://github.com/rfc1036/whois.git", :branch => "master" 
 
