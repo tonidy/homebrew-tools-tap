@@ -9,11 +9,11 @@ class Mkpasswd < Formula
   depends_on "openssl@3"
 
   def install
-    # Add missing headers at the top of mkpasswd.c (after any existing includes)
-    inreplace "mkpasswd.c", /^#include.*\n/, "#include <stdio.h>\n#include <string.h>\n\\&"
+    # Add missing headers at the very beginning of mkpasswd.c
+    inreplace "mkpasswd.c", /\A/, "#include <stdio.h>\n#include <string.h>\n\n"
 
-    # Add string.h to utils.c after existing includes
-    inreplace "utils.c", /^#include.*\n/, "#include <string.h>\n\\&"
+    # Add string.h at the beginning of utils.c
+    inreplace "utils.c", /\A/, "#include <string.h>\n\n"
 
     # Generate version.h if missing (required for mkpasswd.c)
     unless File.exist?("version.h")
