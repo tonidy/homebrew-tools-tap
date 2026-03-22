@@ -3,7 +3,7 @@ class Mkpasswd < Formula
   homepage "https://packages.debian.org/sid/whois"
   url "https://github.com/rfc1036/whois/archive/refs/tags/v5.6.6.zip"
   sha256 "3418aa374858199e14a229b89547bc1aca6412ebf18bc3be11cb9d7268bf562a"
-  version "5.6.6_9"
+  version "5.6.6_10"
   license "GPL-2.0-or-later"
   head "https://github.com/rfc1036/whois.git", :branch => "master" 
 
@@ -11,19 +11,14 @@ class Mkpasswd < Formula
   depends_on "openssl"
 
   def install
-    # Fix mkpasswd.c - reorder defines and includes
+    # Fix mkpasswd.c - add includes at absolute start
     mkpasswd_content = File.read("mkpasswd.c")
-    mkpasswd_content = mkpasswd_content.sub(
-      "#define _XOPEN_SOURCE 500\n#define _BSD_SOURCE 1\n#define _DEFAULT_SOURCE 1\n#define __EXTENSIONS__ 1",
-      "#ifndef _XOPEN_SOURCE\n#define _XOPEN_SOURCE 500\n#endif\n#ifndef _BSD_SOURCE\n#define _BSD_SOURCE 1\n#endif\n#ifndef _DEFAULT_SOURCE\n#define _DEFAULT_SOURCE 1\n#endif"
-    )
+    mkpasswd_content = "#include <stdio.h>\n#include <string.h>\n" + mkpasswd_content
     File.write("mkpasswd.c", mkpasswd_content)
 
-    # Fix utils.c - add proper defines
+    # Fix utils.c - add includes at absolute start
     utils_content = File.read("utils.c")
-    unless utils_content.include?('#define _XOPEN_SOURCE')
-      utils_content = "#define _XOPEN_SOURCE 500\n" + utils_content
-    end
+    utils_content = "#include <string.h>\n" + utils_content
     File.write("utils.c", utils_content)
 
     # Add pkg-config support for libcrypto in Makefile
