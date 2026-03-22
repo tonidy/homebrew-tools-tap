@@ -1,10 +1,10 @@
 class Pa < Formula
   desc "A simple CLI password manager"
   homepage "https://github.com/tonidy/pa-cli"
-  url "https://github.com/tonidy/pa-cli/archive/refs/tags/v1.2.1.tar.gz"
-  sha256 "0de7f86431134a7e357f3d03580dd1a8ea9125fd2636c045c11a690c879cd3e3"
+  url "https://github.com/tonidy/pa-cli/archive/refs/tags/v1.2.2.tar.gz"
+  sha256 "b13da6e1db3844087f38adfe6870b8392df1c19cc67b8e59ddd9b4163c8b2674"
   license "AGPL-3.0"
-  revision 2
+  revision 1
 
   depends_on "age"
   depends_on "fzf"
@@ -12,15 +12,15 @@ class Pa < Formula
   def install
     # Replace version placeholders (similar to Makefile install target)
     inreplace "pa" do |s|
-      s.gsub!('PA_VERSION="__VERSION__"', "PA_VERSION=\"v1.2.1\"")
-      s.gsub!('PA_RELEASE_DATE="__RELEASE_DATE__"', "PA_RELEASE_DATE=\"Oct 24 2025\"")
-      s.gsub!('PA_COMMIT="__COMMIT__"', "PA_COMMIT=\"c6d63ee\"")
+      s.gsub!('PA_VERSION="__VERSION__"', "PA_VERSION=\"v1.2.2\"")
+      s.gsub!('PA_RELEASE_DATE="__RELEASE_DATE__"', "PA_RELEASE_DATE=\"Mar 22 2026\"")
+      s.gsub!('PA_COMMIT="__COMMIT__"', "PA_COMMIT=\"889d604\"")
     end
 
     bin.install "pa"
   end
 
   test do
-    assert_match(/pa version: v1.2.1/, `#{bin}/pa --version 2>&1`)
+    assert_match(/pa version: v1.2.2/, `#{bin}/pa --version 2>&1`)
   end
 end
