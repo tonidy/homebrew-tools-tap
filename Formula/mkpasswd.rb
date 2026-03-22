@@ -1,23 +1,25 @@
 class Mkpasswd < Formula
   desc "mkpasswd: tool to make a password"
   homepage "https://packages.debian.org/sid/whois"
-  url "https://github.com/rfc1036/whois/archive/refs/tags/v5.5.9.zip"
-  sha256 "c37d62883f549f28d214aa1aa1f393d335d20589f0353be714d568bd597ec5f2"
-  version "5.5.9"
+  url "https://github.com/rfc1036/whois/archive/refs/tags/v5.6.6.zip"
+  sha256 "3418aa374858199e14a229b89547bc1aca6412ebf18bc3be11cb9d7268bf562a"
+  version "5.6.6"
   license "GPL-2.0-or-later"
   head "https://github.com/rfc1036/whois.git", :branch => "master" 
-
-  stable do
-    patch do
-      url "https://gist.github.com/tonidy/6676834c5434998d5a37200e39a533ed/raw/559e011077db15ac755e08eb971c1e1251653ff9/whois.diff"
-      sha256 "e6a173c5c31d0e57edd2576e3b82cb084544af988e4d5861b24eee28c8ffb8fa"
-    end
-  end
 
   depends_on "pkg-config" => :build
   depends_on "openssl"
 
   def install
+    # Fix missing C99 headers for modern compilers
+    inreplace "mkpasswd.c", '#include "config.h"', '#include "config.h"\n#include <stdio.h>\n#include <string.h>'
+    inreplace "utils.c", '#include "config.h"', '#include "config.h"\n#include <string.h>'
+
+    # Add pkg-config support for libcrypto
+    inreplace "Makefile" do |s|
+      s.gsub(/^else$/, "else ifeq ($(shell $(PKG_CONFIG) --exists 'libcrypto' || echo NO),)\n  mkpasswd_LDADD += $(shell $(PKG_CONFIG) --libs libcrypto)\nelse")
+    end
+
     on_macos do
       ENV.append "LDFLAGS", "-L/usr/lib -liconv"
     end
