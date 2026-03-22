@@ -3,36 +3,40 @@ class Mkpasswd < Formula
   homepage "https://github.com/rfc1036/whois"
   url "https://github.com/rfc1036/whois/archive/refs/tags/v5.6.6.tar.gz"
   sha256 "43d3b3cc64c75e8bd10aee6feff3906e9488ed335076d206e70f3b25bf644969"
-  version "5.6.6"
-  revision 1
+  version "5.6.6_13"
   license "GPL-2.0-or-later"
 
   depends_on "openssl@3"
 
   def install
-  # Prepend correct headers to mkpasswd.c
-  inreplace "mkpasswd.c", /^(.*)/, "#include <stdio.h>\n#include <string.h>\n\\1"
+    # Add missing headers at the top of mkpasswd.c (after any existing includes)
+    inreplace "mkpasswd.c", /^#include.*\n/, "#include <stdio.h>\n#include <string.h>\n\\&"
 
-  # Prepend string.h to utils.c
-  inreplace "utils.c", /^(.*)/, "#include <string.h>\n\\1"
+    # Add string.h to utils.c after existing includes
+    inreplace "utils.c", /^#include.*\n/, "#include <string.h>\n\\&"
 
-  # Patch Makefile for pkg-config libcrypto
-  inreplace "Makefile", /^else$/, <<~EOS
-    else ifeq ($(shell $(PKG_CONFIG) --exists 'libcrypto' || echo NO),)
-      mkpasswd_LDADD += $(shell $(PKG_CONFIG) --libs libcrypto)
-    else
-  EOS
+    # Generate version.h if missing (required for mkpasswd.c)
+    unless File.exist?("version.h")
+      File.write("version.h", "#define VERSION \"#{version}\"\n")
+    end
 
-  on_macos do
-    ENV.append "LDFLAGS", "-L/usr/lib -liconv"
+    # Patch Makefile for pkg-config libcrypto
+    inreplace "Makefile", /^else$/, <<~EOS
+      else ifeq ($(shell $(PKG_CONFIG) --exists 'libcrypto' || echo NO),)
+        mkpasswd_LDADD += $(shell $(PKG_CONFIG) --libs libcrypto)
+      else
+    EOS
+
+    on_macos do
+      ENV.append "LDFLAGS", "-L/usr/lib -liconv"
+    end
+
+    have_iconv = OS.mac? ? "HAVE_ICONV=1" : "HAVE_ICONV=0"
+
+    system "make", "mkpasswd", have_iconv
+    bin.install "mkpasswd"
+    man1.install "mkpasswd.1"
   end
-
-  have_iconv = OS.mac? ? "HAVE_ICONV=1" : "HAVE_ICONV=0"
-
-  system "make", "mkpasswd", have_iconv
-  bin.install "mkpasswd"
-  man1.install "mkpasswd.1"
-end
 
   test do
     output = shell_output("#{bin}/mkpasswd password")
