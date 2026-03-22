@@ -3,7 +3,7 @@ class Mkpasswd < Formula
   homepage "https://github.com/rfc1036/whois"
   url "https://github.com/rfc1036/whois/archive/refs/tags/v5.6.6.tar.gz"
   sha256 "43d3b3cc64c75e8bd10aee6feff3906e9488ed335076d206e70f3b25bf644969"
-  version "5.6.6_13"
+  version "5.6.6_14"
   license "GPL-2.0-or-later"
 
   depends_on "openssl@3"
