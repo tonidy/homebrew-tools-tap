@@ -3,7 +3,7 @@ class Mkpasswd < Formula
   homepage "https://packages.debian.org/sid/whois"
   url "https://github.com/rfc1036/whois/archive/refs/tags/v5.6.6.zip"
   sha256 "3418aa374858199e14a229b89547bc1aca6412ebf18bc3be11cb9d7268bf562a"
-  version "5.6.6_5"
+  version "5.6.6_6"
   license "GPL-2.0-or-later"
   head "https://github.com/rfc1036/whois.git", :branch => "master" 
 
@@ -11,9 +11,15 @@ class Mkpasswd < Formula
   depends_on "openssl"
 
   def install
+    # Debug: print current directory and files
+    puts "Current directory: #{Dir.pwd}"
+    puts "Files: #{Dir.glob('*').join(', ')}"
+
     # Read source files
     mkpasswd_content = File.read("mkpasswd.c")
     utils_content = File.read("utils.c")
+
+    puts "mkpasswd.c before: #{mkpasswd_content.lines[20..35].join}"
 
     # Fix mkpasswd.c - add stdio.h and string.h after config.h
     unless mkpasswd_content.include?('#include <stdio.h>')
@@ -22,6 +28,8 @@ class Mkpasswd < Formula
 #include <string.h>')
       File.write("mkpasswd.c", mkpasswd_content)
     end
+
+    puts "mkpasswd.c after: #{File.read("mkpasswd.c").lines[20..35].join}"
 
     # Fix utils.c - add string.h after config.h
     unless utils_content.include?('#include <string.h>')
