@@ -11,11 +11,7 @@ class Mkpasswd < Formula
   depends_on "openssl"
 
   def install
-    # Fix missing C99 headers for modern compilers
-    inreplace "mkpasswd.c", '#include "config.h"', '#include "config.h"\n#include <stdio.h>\n#include <string.h>'
-    inreplace "utils.c", '#include "config.h"', '#include "config.h"\n#include <string.h>'
-
-    # Add pkg-config support for libcrypto
+    # Add pkg-config support for libcrypto in Makefile
     inreplace "Makefile" do |s|
       s.gsub(/^else$/, "else ifeq ($(shell $(PKG_CONFIG) --exists 'libcrypto' || echo NO),)\n  mkpasswd_LDADD += $(shell $(PKG_CONFIG) --libs libcrypto)\nelse")
     end
