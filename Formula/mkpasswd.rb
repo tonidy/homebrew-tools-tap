@@ -4,7 +4,7 @@ class Mkpasswd < Formula
   url "https://github.com/rfc1036/whois/archive/refs/tags/v5.6.6.tar.gz"
   sha256 "43d3b3cc64c75e8bd10aee6feff3906e9488ed335076d206e70f3b25bf644969"
   license "GPL-2.0-or-later"
-  revision 25
+  revision 26
 
   depends_on "openssl@3"
 
@@ -41,6 +41,7 @@ class Mkpasswd < Formula
   end
 
   test do
+    assert_match(/5\.6\.6/, `#{bin}/mkpasswd -V 2>&1`)
     output = shell_output("#{bin}/mkpasswd password")
     assert_match(/.+/, output)
   end
