@@ -46,7 +46,5 @@ jobs:
 
       - name: Install and test formulae
         run: |
-          brew install gen-secp
-          brew install pa
-          brew test gen-secp
-          brew test pa
+          brew install mkpasswd
+          brew test mkpasswd
