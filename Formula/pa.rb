@@ -1,9 +1,9 @@
 class Pa < Formula
-  desc "A simple CLI password manager"
+  desc "Simple CLI password manager"
   homepage "https://github.com/tonidy/pa-cli"
   url "https://github.com/tonidy/pa-cli/archive/refs/tags/v1.2.2.tar.gz"
   sha256 "b13da6e1db3844087f38adfe6870b8392df1c19cc67b8e59ddd9b4163c8b2674"
-  license "AGPL-3.0"
+  license "AGPL-3.0-or-later"
   revision 1
 
   depends_on "age"
