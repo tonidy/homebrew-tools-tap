@@ -2,7 +2,7 @@
 
 ## Why?
 
-Homebrew tap for my personal CLI tools, contains useful utilities I use daily and made available for anyone to install.
+Homebrew tap for my personal CLI tools, contains useful utilities I use from time to time and made available for anyone to install.
 
 ## Available Formulae
 
