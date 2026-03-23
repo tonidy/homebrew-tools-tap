@@ -17,9 +17,7 @@ jobs:
 
       - name: Tap repository
         run: |
-          mkdir -p $(brew --repository)/Library/Taps/tonidy/homebrew-tools-tap
-          rm -rf $(brew --repository)/Library/Taps/tonidy/homebrew-tools-tap
-          cp -r ${{ github.workspace }} $(brew --repository)/Library/Taps/tonidy/homebrew-tools-tap
+          brew tap tonidy/tools-tap https://github.com/tonidy/homebrew-tools-tap.git
 
       - name: Cache Homebrew Bundler RubyGems
         id: cache
