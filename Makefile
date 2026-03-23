@@ -1,4 +1,4 @@
 .PHONY: audit
 
 audit:
-	brew audit --strict --online Formula/*.rb
+	brew audit --strict --online gen-secp mkpasswd pa
