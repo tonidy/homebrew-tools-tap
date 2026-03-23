@@ -28,16 +28,11 @@ class Mkpasswd < Formula
     # Ensure -lcrypt is added at the end of LDADD
     inreplace "Makefile", /^(mkpasswd_LDADD \+=.*)$/, "\\1 -lcrypt"
 
-    if OS.mac?
-      ENV.append "LDFLAGS", "-L/usr/lib -liconv"
-    end
+    ENV.append "LDFLAGS", "-L/usr/lib -liconv" if OS.mac?
 
     have_iconv = OS.mac? ? "HAVE_ICONV=1" : "HAVE_ICONV=0"
 
-    # Linux needs PKG_CONFIG_PATH for openssl
-    if OS.linux?
-      ENV["PKG_CONFIG_PATH"] = Formula["openssl@3"].opt_lib/"pkgconfig"
-    end
+    ENV["PKG_CONFIG_PATH"] = Formula["openssl@3"].opt_lib/"pkgconfig" if OS.linux?
 
     system "make", "mkpasswd", have_iconv
     bin.install "mkpasswd"
