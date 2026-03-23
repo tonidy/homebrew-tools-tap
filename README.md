@@ -8,7 +8,7 @@ Homebrew tap for my personal CLI tools, contains useful utilities I use from tim
 
 | Formula | Description |
 |---------|-------------|
-| [gen-secp](Formula/gen-secp.rb) | Generate secp256k1 keypairs for local development |
+| [gen-secp](Formula/gen-secp.rb) | Generate secp256k1 keypairs for dotenvx |
 | [mkpasswd](Formula/mkpasswd.rb) | Generate hashed passwords (from whois package) |
 | [pa](Formula/pa.rb) | A simple CLI password manager using age encryption |
 
