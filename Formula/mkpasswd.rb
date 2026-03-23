@@ -6,8 +6,8 @@ class Mkpasswd < Formula
   license "GPL-2.0-or-later"
   revision 27
 
-  depends_on "openssl@3"
   depends_on "libxcrypt", if: OS.mac?
+  depends_on "openssl@3"
 
   def install
     # Add missing headers at the very beginning of mkpasswd.c
@@ -26,9 +26,7 @@ class Mkpasswd < Formula
       else
     EOS
 
-    if OS.mac?
-      ENV.append "LDFLAGS", "-L#{Formula["libxcrypt"].opt_lib} -liconv"
-    end
+    ENV.append "LDFLAGS", "-L#{Formula["libxcrypt"].opt_lib} -liconv" if OS.mac?
 
     have_iconv = OS.mac? ? "HAVE_ICONV=1" : "HAVE_ICONV=0"
 
