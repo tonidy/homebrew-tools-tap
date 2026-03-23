@@ -20,5 +20,7 @@ class GenSecp < Formula
 
   test do
     assert_match(/genkey/, `#{bin}/genkey --help 2>&1`)
+    assert_path_exists(python_site_packages/"pyproject.toml")
+    assert_match(/0\.1\.6/, `#{bin}/genkey --version 2>&1`)
   end
 end
