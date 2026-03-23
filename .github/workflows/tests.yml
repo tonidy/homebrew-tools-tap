@@ -14,8 +14,12 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
-        with:
-          tap-name: tonidy/tools-tap
+
+      - name: Tap repository
+        run: |
+          mkdir -p $(brew --repository)/Library/Taps/tonidy/homebrew-tools-tap
+          rm -rf $(brew --repository)/Library/Taps/tonidy/homebrew-tools-tap
+          cp -r ${{ github.workspace }} $(brew --repository)/Library/Taps/tonidy/homebrew-tools-tap
 
       - name: Cache Homebrew Bundler RubyGems
         id: cache
