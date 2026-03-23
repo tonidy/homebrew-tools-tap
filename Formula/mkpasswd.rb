@@ -4,7 +4,7 @@ class Mkpasswd < Formula
   url "https://github.com/rfc1036/whois/archive/refs/tags/v5.6.6.tar.gz"
   sha256 "43d3b3cc64c75e8bd10aee6feff3906e9488ed335076d206e70f3b25bf644969"
   license "GPL-2.0-or-later"
-  revision 18
+  revision 19
 
   depends_on "openssl@3"
 
@@ -18,12 +18,14 @@ class Mkpasswd < Formula
     # Generate version.h if missing (required for mkpasswd.c)
     File.write("version.h", "#define VERSION \"#{version}\"\n") unless File.exist?("version.h")
 
-    # Patch Makefile for pkg-config libcrypto
+    # Patch Makefile for pkg-config libcrypto and add libcrypt
     inreplace "Makefile", /^else$/, <<~EOS
       else ifeq ($(shell $(PKG_CONFIG) --exists 'libcrypto' || echo NO),)
         mkpasswd_LDADD += $(shell $(PKG_CONFIG) --libs libcrypto)
       else
     EOS
+
+    inreplace "Makefile", /^(mkpasswd_LDADD \+=.*)$/, "\\1 -lcrypt"
 
     if OS.mac?
       ENV.append "LDFLAGS", "-L/usr/lib -liconv"
